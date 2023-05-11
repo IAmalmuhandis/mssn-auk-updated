@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from '@mui/system';
+import { styled, keyframes } from '@mui/system';
 import { Grid, Typography, TextField, Button, Paper } from '@mui/material';
 import aukLogo from './assets/auk-logo.png';
 import mssnLogo from './assets/mssn-auk.png';
@@ -35,24 +35,48 @@ const StyledPaper = styled(Paper)({
   margin: 'auto',
   maxWidth: 500,
   backgroundColor: 'rgba(255, 255, 255, 0.8)',
-  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', // Add a box shadow
+  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+ 
 });
 
 const StyledTitle = styled(Typography)({
   fontWeight: 'bold',
   marginBottom: '1rem',
-  color: '#fff',
-  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
 });
 
 const StyledSubtitle = styled(Typography)({
-  color: '#333',
+  marginBottom: '1.5rem',
 });
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const pulse = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 
 const StyledForm = styled('form')({
   display: 'flex',
   flexDirection: 'column',
+   
   alignItems: 'center',
+  animation: `${fadeIn} 1s ease-in-out`,
   '& .MuiTextField-root': {
     margin: '0.5rem',
     width: '100%',
@@ -66,6 +90,7 @@ const StyledPaymentButton = styled(Button)({
   '&:hover': {
     backgroundColor: '#c51162',
   },
+  animation: `${pulse} 1s ease-in-out infinite`,
 });
 
 function App() {
@@ -85,37 +110,35 @@ function App() {
               Make Payment and Verify your Registration
             </StyledSubtitle>
             <StyledForm>
-<TextField label="Full Name" variant="outlined" />
-<TextField label="Registration Number" variant="outlined" />
-<TextField label="Email" variant="outlined" />
-<TextField label="Phone Number" variant="outlined" />
-<TextField
-  label="Level"
-  variant="outlined"
-  select
-  SelectProps={{
-    native: true,
-  }}
->
-  <option value="100">100</option>
-  <option value="200">200</option>
-  <option value="300">300</option>
-  <option value="400">400</option>
-</TextField>
-<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-  <Typography variant="body1" style={{ fontWeight: 'bold' }}>
-    Registration Price:
-  </Typography>
-  <Typography variant="body1" style={{ backgroundColor: '#f50057', color: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
-    N500
-  </Typography>
-</div>
-
-
-<StyledPaymentButton variant="contained">
-  Make Payment
-</StyledPaymentButton>
-</StyledForm>
+              <TextField label="Full Name" variant="outlined" />
+              <TextField label="Registration Number" variant="outlined" />
+              <TextField label="Email" variant="outlined" />
+              <TextField label="Phone Number" variant="outlined" />
+              <TextField
+                label="Level"
+                variant="outlined"
+                select
+                SelectProps={{
+                  native: true,
+                }}
+              >
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+              </TextField>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                  Registration Price:
+                </Typography>
+                <Typography variant="body1" style={{ backgroundColor: '#f50057', color: '#fff', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
+                  N500
+                </Typography>
+              </div>
+              <StyledPaymentButton variant="contained">
+                Make Payment
+              </StyledPaymentButton>
+            </StyledForm>
           </StyledPaper>
         </Grid>
       </Grid>
@@ -124,4 +147,3 @@ function App() {
 }
 
 export default App;
-
