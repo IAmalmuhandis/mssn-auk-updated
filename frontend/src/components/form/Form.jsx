@@ -8,8 +8,30 @@ const Form = () => {
   const [level, setLevel] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(false);
+
   const handleSubmit = (e) => {
+    setError(null);
     e.preventDefault();
+    if (name === undefined || name === "" || name === null) {
+      setError("Name field is required");
+      return false;
+    }
+    if (regNo === undefined || regNo === "" || regNo === null) {
+      setError("Registration number field is required");
+      return false;
+    }
+    if (department === undefined || department === "" || department === null) {
+      setError("Department field is required");
+      return false;
+    }
+    if (level === undefined || level === "" || level === null) {
+      setError("Level field is required");
+      return false;
+    }
+    if (phone === undefined || phone === "" || phone === null) {
+      setError("Phone field is required");
+      return false;
+    }
     console.log(name, regNo, department, level, phone);
   };
   return (
@@ -28,9 +50,9 @@ const Form = () => {
           <Typography variant="h4" sx={{ m: 1, p: 1 }}>
             <b>Student Details</b>
           </Typography>
-          <Typography sx={{ fontSize: 16, color: "red" }}>
-            hell is empty
-          </Typography>
+          {error && <Typography sx={{ fontSize: 16, color: "red" }}>
+            {error}
+          </Typography>}
         </Box>
         <Grid item xs={12}>
           <TextField

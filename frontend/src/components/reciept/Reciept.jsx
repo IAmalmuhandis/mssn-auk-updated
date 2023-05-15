@@ -3,7 +3,7 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 
 import QRCode from 'qrcode'
 import html2pdf from "html2pdf.js";
-import jsPDF from 'jspdf'
+import { useReactToPrint } from 'react-to-print';
 
 import Navbar from "../navbar/Navbar";
 import aukLogo from "./../../assets/auk-logo.png";
@@ -43,10 +43,14 @@ const Reciept = () => {
     html2pdf().from(content).set(options).save();
   };
 
+  const handlePrint = useReactToPrint({
+    content: () => contentRef.current,
+  });
+
   return (
     <div className="reciept">
       <Navbar />
-      <Box width='100%' sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+      <Box width='100%' sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: 20 }}>
         <Paper elevation={4} sx={{width: 595}}>
           <Box ref={contentRef} width='100%' sx={{ mt: 5, alignItems: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column', position: 'relative' }}>
           <div className="header" style={{position: 'relative', paddingTop: 110, width: '100%'}}>
@@ -57,8 +61,8 @@ const Reciept = () => {
           </div>
           <hr style={{ width: '70%' }} />
           
-            <img src={aukLogo} style={{position: 'absolute', top: 200, left: 70, opacity: .2}} alt="auk-logo" width={200} />
-            <img src={mssnLogo} style={{position: 'absolute',  bottom: 200, right: 70, opacity: .2}} alt="auk-logo" width={200} />
+            <img src={aukLogo} style={{position: 'absolute', top: 200, left: 130, opacity: .2}} alt="auk-logo" width={200} />
+            <img src={mssnLogo} style={{position: 'absolute',  bottom: 200, right: 130, opacity: .2}} alt="auk-logo" width={200} />
           <div className="details" style={{ width: '70%' }}>
             <div className="info name">
               <p className="key">Name:</p>
@@ -90,13 +94,27 @@ const Reciept = () => {
             </div>
           </div>
 
-          <div className="qrcode" style={{marginTop: 70}}>
+          <div className="qrcode" style={{marginTop: 35, marginBottom: 35}}>
             <img src={qrCode} width={150} alt="qrcode" />
           </div>
             
         </Box>
         </Paper>
-        <Button onClick={downloadPdf}>Download as pdf</Button>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap:2 }}>
+          <Button
+          onClick={downloadPdf}
+          sx={{
+            background:
+          "linear-gradient(43deg, rgba(34,186,50,1) 0%, rgba(240,202,143,1) 100%)", fontWeight: 'bold', marginTop: 2, marginBottom: 10
+        }} variant="contained">
+          Download as pdf
+        </Button>
+        <Button onClick={handlePrint} sx={{background:
+          "linear-gradient(43deg, rgba(34,186,50,1) 0%, rgba(240,202,143,1) 100%)", fontWeight: 'bold', marginTop: 2, marginBottom: 10
+        }} variant="contained">
+          Print Reciept
+        </Button>
+        </Box>
       </Box>
     </div>
   );

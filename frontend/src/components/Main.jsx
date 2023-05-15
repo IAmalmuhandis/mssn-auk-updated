@@ -12,7 +12,7 @@ function Main() {
         justifyContent="center"
         alignItems="center"
         style={{ height: "100%" }}>
-        <Grid item>
+        <Grid  sx={{marginTop: 10}} item>
           <Form />
         </Grid>
       </Grid>
