@@ -1,0 +1,17 @@
+/* Details.css */
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.key {
+  font-weight: bold;
+}
+
+.value {
+  margin-left: 10px;
+}
+
+/* Additional styling if needed */
